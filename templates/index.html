@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="Split any shared bill fairly. Add items, assign people, and calculate everyone's share including GST.">
+  <title>FairTab — make the math feel easy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="FairTab home"><span class="brand-mark">f<span>.</span></span><span>FairTab</span></a>
+    <div class="top-note"><span class="live-dot"></span> Your math, made fair</div>
+    <button class="currency-button" id="currencyButton" type="button" aria-label="Change currency"><span id="currencySymbol">₹</span> INR <span class="chevron">⌄</span></button>
+  </header>
+
+  <main id="top">
+    <section class="intro">
+      <div class="eyebrow"><span>✳</span> THE FRIENDLY BILL SPLITTER</div>
+      <h1>Good times.<br><span>Fair shares.</span></h1>
+      <p>Every item, every person, every tax. Sorted in a few taps.</p>
+    </section>
+
+    <div class="workspace">
+      <section class="editor card" aria-label="Bill details">
+        <div class="section-heading"><div><span class="step">01</span><h2>The crew</h2></div><span class="muted" id="peopleCount">2 people</span></div>
+        <div class="people-list" id="peopleList"></div>
+        <button class="text-button" id="addPerson" type="button"><span class="plus">+</span> Add a person</button>
+
+        <div class="divider"></div>
+        <div class="section-heading items-heading"><div><span class="step">02</span><h2>What’s on the bill?</h2></div><span class="muted" id="itemCount">0 items</span></div>
+        <div class="items-list" id="itemsList"></div>
+        <button class="add-item" id="addItem" type="button"><span>+</span> Add an item</button>
+
+        <div class="tax-panel">
+          <div class="tax-copy"><span class="tax-icon">%</span><div><strong>GST / tax</strong><small>Applied fairly to every item</small></div></div>
+          <label class="rate-input"><input id="gstRate" type="number" min="0" max="100" step="0.01" value="5" aria-label="GST percentage"><span>%</span></label>
+        </div>
+        <button class="calculate-button" id="calculate" type="button">Calculate the split <span>↗</span></button>
+        <p class="privacy-note"><span>✦</span> Your numbers stay right here in this tab.</p>
+      </section>
+
+      <aside class="results card" aria-live="polite" aria-label="Bill split results">
+        <div class="result-top"><div><span class="step">03</span><span class="result-label">THE GRAND TOTAL</span></div><span class="sparkle">✳</span></div>
+        <div class="grand-total" id="grandTotal">₹<span>0</span><small>.00</small></div>
+        <div class="total-breakdown"><span>Items subtotal</span><strong id="subtotal">₹0.00</strong><span>GST <em id="gstLabel">(5%)</em></span><strong id="gstTotal">₹0.00</strong></div>
+        <div class="divider"></div>
+        <div class="share-heading"><h2>Everyone’s share</h2><span class="equal-note">ITEM BY ITEM</span></div>
+        <div class="shares-list" id="sharesList"><div class="empty-state"><span class="empty-icon">↗</span><strong>Your split is waiting.</strong><p>Add a bill item and we’ll do the math.</p></div></div>
+        <div class="result-footer"><span class="check-icon">✓</span> Tax is split in proportion to each item.</div>
+      </aside>
+    </div>
+    <footer>Made for the “I’ll just pay you back” moments. <span>✳</span></footer>
+  </main>
+  <div class="toast" id="toast" role="alert"></div>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
